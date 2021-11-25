@@ -7,21 +7,25 @@ import java.net.URL;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+
+import es.deusto.ingenieria.sd.auctions.server.data.dto.EntrenamientoDTO;
+import es.deusto.ingenieria.sd.auctions.server.data.dto.TipoUsuarioDTO;
+import es.deusto.ingenieria.sd.auctions.server.data.dto.UserDTO;
 
 public class RegistrationService extends UnicastRemoteObject implements IRegistration {
 	private static final long serialVersionUID = 1L;
 
-	protected static final String URL = "https://free.currconv.com/api/v7/convert?q=USD_EUR,GBP_EUR&compact=ultra&apiKey=d4f1b436d25d00b16f3f";
-	public static float USD_RATE = 0.85f;
-	public static float GBP_RATE = 1.17f;
 	
 	//Attribute for the Singleton pattern
 	public static RegistrationService instance;
 			
 	private RegistrationService() throws RemoteException {
 		super();
-		getConversionRates();
+//		getConversionRates();
 	}
 	
 	public static RegistrationService getInstance() {
@@ -36,45 +40,83 @@ public class RegistrationService extends UnicastRemoteObject implements IRegistr
 		return instance;
 	}
 
-	private static final void getConversionRates() {
-		System.out.println(" - Getting exchange rates from 'free.currconv.com'....");
+	@Override
+	public UserDTO getUsuarioGoogle(String nickName) {
+		HashMap<String, UserDTO> hashGoogle = new HashMap();
 		
-		try {			
-			HttpURLConnection con = (HttpURLConnection) (new URL(URL).openConnection());			
-			con.setRequestProperty("User-Agent", "Mozilla/5.0");
-			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-			
-			String inputLine;
-			StringBuffer response = new StringBuffer();
+		UserDTO u = new UserDTO();
+		u.setNickname("Billle");
+		
+		EntrenamientoDTO e1 = new EntrenamientoDTO();
+		e1.setDeporte("bici");
+		e1.setDistancia(110);
+		e1.setDuracion(11);
+		e1.setFechaIni("11/11/2021");
+		e1.setHoraIni("11:11");
+		e1.setTitulo("EncontrarABilllie");
+		
+		EntrenamientoDTO e2 = new EntrenamientoDTO();
+		e1.setDeporte("correr");
+		e1.setDistancia(11000);
+		e1.setDuracion(111);
+		e1.setFechaIni("11/11/2021");
+		e1.setHoraIni("11:11");
+		e1.setTitulo("CorrerOMorir");
 
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			
-			con.disconnect();
+		List<EntrenamientoDTO> entrenamientos = new ArrayList<>();
+		entrenamientos.add(e2);
+		entrenamientos.add(e1);
+		u.setEntrenamientos(entrenamientos);
+		
+		u.setRetosAceptados(new ArrayList<>());
+		u.setTipoUsuario(TipoUsuarioDTO.GOOGLE);
+		
+		hashGoogle.put(u.getNickname(), u);
+		
+		UserDTO u2 = new UserDTO();
+		u2.setNickname("Astro");
+		
+		EntrenamientoDTO e3 = new EntrenamientoDTO();
+		e3.setDeporte("bici");
+		e3.setDistancia(9000);
+		e3.setDuracion(2);
+		e3.setFechaIni("20/11/2021");
+		e3.setHoraIni("10:23");
+		e3.setTitulo("PedaLeando");
+		
+		EntrenamientoDTO e4 = new EntrenamientoDTO();
+		e4.setDeporte("correr");
+		e4.setDistancia(10000);
+		e4.setDuracion(2);
+		e4.setFechaIni("19/09/2021");
+		e4.setHoraIni("00:03");
+		e4.setTitulo("AstroNauta");
 
-			inputLine = response.toString();
-			USD_RATE = Float.parseFloat(inputLine.substring(inputLine.indexOf(":")+1, inputLine.indexOf(",")));
-			GBP_RATE = Float.parseFloat(inputLine.substring(inputLine.lastIndexOf(":")+1, inputLine.indexOf("}")));
-		} catch(Exception ex) {
-			System.out.println("  # Error getting conversion rates(): " + ex.getMessage());
+		List<EntrenamientoDTO> entrenamientos2 = new ArrayList<>();
+		entrenamientos.add(e3);
+		entrenamientos.add(e4);
+		u2.setEntrenamientos(entrenamientos2);
+		
+		u2.setRetosAceptados(new ArrayList<>());
+		u2.setTipoUsuario(TipoUsuarioDTO.GOOGLE);
+		
+		hashGoogle.put(u2.getNickname(), u2);
+		
+		if(hashGoogle.containsKey(nickName)) {
+			return hashGoogle.get(nickName);
 		}
 		
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd/MM/YYYY - HH:mm");
-		
-		
-		System.out.println(" - Exchange rates obtained (" + dateFormatter.format(Calendar.getInstance().getTime()) + ")!!");
-		System.out.println("\t- EURO to USD rate: " + USD_RATE);
-		System.out.println("\t- EURO to GBP rate: " + GBP_RATE);
-	}
-	
-	public float getUSDRate() throws RemoteException {
-		getConversionRates();
-		return USD_RATE;
+		return null;
 	}
 
-	public float getGBPRate() throws RemoteException {
-		getConversionRates();
-		return GBP_RATE;
+	@Override
+	public UserDTO getUsuarioFacebook(String nickName) {
+		UserDTO u = new UserDTO();
+		
+		
+		
+		return null;
 	}
+
+	
 }
