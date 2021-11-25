@@ -2,10 +2,10 @@ package es.deusto.ingenieria.sd.auctions.currency.server;
 
 import java.rmi.Naming;
 
-import es.deusto.ingenieria.sd.auctions.currency.remote.CurrencyExchangeService;
-import es.deusto.ingenieria.sd.auctions.currency.remote.ICurrencyExchange;
+import es.deusto.ingenieria.sd.auctions.currency.remote.RegistrationService;
+import es.deusto.ingenieria.sd.auctions.currency.remote.IRegistration;
 
-public class CurrecyExchangeServer {
+public class RegistrationServer {
 
 	public static void main(String[] args) {
 		if (System.getSecurityManager() == null) {
@@ -15,7 +15,7 @@ public class CurrecyExchangeServer {
 		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];		
 		
 		try {
-			ICurrencyExchange remoteObject = CurrencyExchangeService.getInstance();			
+			IRegistration remoteObject = RegistrationService.getInstance();			
 			Naming.rebind(name, remoteObject);
 			System.out.println(" * Currency Exchange Server '" + name + "' started!!");
 		} catch (Exception ex) {
