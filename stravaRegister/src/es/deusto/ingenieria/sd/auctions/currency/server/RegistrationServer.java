@@ -2,8 +2,8 @@ package es.deusto.ingenieria.sd.auctions.currency.server;
 
 import java.rmi.Naming;
 
-import es.deusto.ingenieria.sd.auctions.currency.remote.RegistrationService;
-import es.deusto.ingenieria.sd.auctions.currency.remote.IRegistration;
+import es.deusto.ingenieria.sd.auctions.currency.remote.RegistrationGoogleService;
+import es.deusto.ingenieria.sd.auctions.currency.remote.IRegistrationGoogle;
 
 public class RegistrationServer {
 
@@ -15,7 +15,7 @@ public class RegistrationServer {
 		String name = "//" + args[0] + ":" + args[1] + "/" + args[2];		
 		
 		try {
-			IRegistration remoteObject = RegistrationService.getInstance();			
+			IRegistrationGoogle remoteObject = RegistrationGoogleService.getInstance();			
 			Naming.rebind(name, remoteObject);
 			System.out.println(" * Currency Exchange Server '" + name + "' started!!");
 		} catch (Exception ex) {
