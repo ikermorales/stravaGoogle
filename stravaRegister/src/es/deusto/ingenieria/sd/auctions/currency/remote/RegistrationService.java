@@ -45,7 +45,7 @@ public class RegistrationService extends UnicastRemoteObject implements IRegistr
 		HashMap<String, UserDTO> hashGoogle = new HashMap();
 		
 		UserDTO u = new UserDTO();
-		u.setNickname("Billle");
+		u.setNickname("Billlie");
 		
 		EntrenamientoDTO e1 = new EntrenamientoDTO();
 		e1.setDeporte("bici");
@@ -105,15 +105,6 @@ public class RegistrationService extends UnicastRemoteObject implements IRegistr
 		if(hashGoogle.containsKey(nickName)) {
 			return hashGoogle.get(nickName);
 		}
-		
-		return null;
-	}
-
-	@Override
-	public UserDTO getUsuarioFacebook(String nickName) {
-		UserDTO u = new UserDTO();
-		
-		
 		
 		return null;
 	}
