@@ -14,17 +14,12 @@ import java.util.List;
 
 public class RegistrationGoogleService extends UnicastRemoteObject implements IRegistrationGoogle {
 	private static final long serialVersionUID = 1L;
-	
-	private HashMap<String, String> hashGoogle = new HashMap<>();
-
-	
-	//Attribute for the Singleton pattern
-	public static RegistrationGoogleService instance;
+	private HashMap<String, String> hashGoogle = new HashMap<>();	
+	private static RegistrationGoogleService instance;
 			
 	private RegistrationGoogleService() throws RemoteException {
 		super();
-//		getConversionRates();
-	}
+	}	
 	
 	public static RegistrationGoogleService getInstance() {
 		if (instance == null) {
@@ -40,18 +35,15 @@ public class RegistrationGoogleService extends UnicastRemoteObject implements IR
 
 	@Override
 	public boolean checkCuentaGmail(String email, String contrasenya) {
+		this.getInstance();
 		hashGoogle.put("billlie@gmail.com", "eleven");
-		hashGoogle.put("astro@gmail.com", "nauta");
-		hashGoogle.put("euwnoo@gmail.com", "1");
-		hashGoogle.put("rosalia@gmail.com", "rosalia");
-		hashGoogle.put("gorka@gmail.com", "gorka");
 		
 		if(hashGoogle.containsKey(email)) {
 			if(hashGoogle.get(email).matches(contrasenya)) {
+				System.out.println(contrasenya);
 				return true;
 			}
 		}
-		
 		return false;
 	}
 
