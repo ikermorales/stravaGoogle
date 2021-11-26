@@ -41,8 +41,8 @@ public class RegistrationService extends UnicastRemoteObject implements IRegistr
 	}
 
 	@Override
-	public UserDTO getUsuarioGoogle(String nickName) {
-		HashMap<String, UserDTO> hashGoogle = new HashMap();
+	public String getUsuarioGoogle(String nickName) {
+		HashMap<String, String> hashGoogle = new HashMap();
 		
 		UserDTO u = new UserDTO();
 		u.setNickname("Billlie");
@@ -60,7 +60,7 @@ public class RegistrationService extends UnicastRemoteObject implements IRegistr
 		e1.setDistancia(11000);
 		e1.setDuracion(111);
 		e1.setFechaIni("11/11/2021");
-		e1.setHoraIni("11:11");
+		e1.setHoraIni("00:11");
 		e1.setTitulo("CorrerOMorir");
 
 		List<EntrenamientoDTO> entrenamientos = new ArrayList<>();
