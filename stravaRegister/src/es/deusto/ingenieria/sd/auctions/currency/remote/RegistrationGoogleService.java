@@ -40,7 +40,6 @@ public class RegistrationGoogleService extends UnicastRemoteObject implements IR
 		
 		if(hashGoogle.containsKey(email)) {
 			if(hashGoogle.get(email).matches(contrasenya)) {
-				System.out.println(contrasenya);
 				return true;
 			}
 		}
