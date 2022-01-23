@@ -37,6 +37,12 @@ public class RegistrationGoogleService extends UnicastRemoteObject implements IR
 	public boolean checkCuentaGmail(String email, String contrasenya) {
 		this.getInstance();
 		hashGoogle.put("billlie@gmail.com", "eleven");
+		hashGoogle.put("imabol@gmail.com", "imabol");
+		hashGoogle.put("antonio@gmail.com", "antonio");
+		hashGoogle.put("inigo@gmail.com", "inigo");
+		hashGoogle.put("jaio@gmail.com", "jaio");
+		hashGoogle.put("peio@gmail.com", "peio");
+		hashGoogle.put("ortu@gmail.com", "ortu");
 		
 		if(hashGoogle.containsKey(email)) {
 			if(hashGoogle.get(email).matches(contrasenya)) {
@@ -45,6 +51,5 @@ public class RegistrationGoogleService extends UnicastRemoteObject implements IR
 		}
 		return false;
 	}
-
 	
 }
